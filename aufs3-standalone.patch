@@ -20,6 +20,18 @@ index df21e66..c8df03d 100644
  
  /**
   *	touch_atime	-	update the access time
+diff --git a/fs/namei.c b/fs/namei.c
+index 111215b..9663194 100644
+--- a/fs/namei.c
++++ b/fs/namei.c
+@@ -277,6 +277,7 @@ int check_acl(struct inode *inode, int mask)
+ 
+ 	return -EAGAIN;
+ }
++EXPORT_SYMBOL(check_acl);
+ 
+ /*
+  * This does the basic permission checking
 diff --git a/fs/namespace.c b/fs/namespace.c
 index ef42d9b..88af377 100644
 --- a/fs/namespace.c
@@ -152,6 +164,18 @@ index 9ba380c..3419932 100644
  
  /**
   * splice_direct_to_actor - splices data directly between two non-pipes
+diff --git a/fs/xattr.c b/fs/xattr.c
+index c69e6d4..3a7a8eb 100644
+--- a/fs/xattr.c
++++ b/fs/xattr.c
+@@ -207,6 +207,7 @@ vfs_getxattr_alloc(struct dentry *dentry, const char *name, char **xattr_value,
+ 	*xattr_value = value;
+ 	return error;
+ }
++EXPORT_SYMBOL(vfs_getxattr_alloc);
+ 
+ /* Compare an extended attribute value with the given value */
+ int vfs_xattr_cmp(struct dentry *dentry, const char *xattr_name,
 diff --git a/security/commoncap.c b/security/commoncap.c
 index bab0611..3fa2f82 100644
 --- a/security/commoncap.c
