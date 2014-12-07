@@ -20,6 +20,18 @@ index df21e66..c8df03d 100644
  
  /**
   *	touch_atime	-	update the access time
+diff --git a/fs/namei.c b/fs/namei.c
+index 63fb946..551c0c0 100644
+--- a/fs/namei.c
++++ b/fs/namei.c
+@@ -277,6 +277,7 @@ int check_acl(struct inode *inode, int mask)
+ 
+ 	return -EAGAIN;
+ }
++EXPORT_SYMBOL(check_acl);
+ 
+ /*
+  * This does the basic permission checking
 diff --git a/fs/namespace.c b/fs/namespace.c
 index 5b66b2b..68ff4e4 100644
 --- a/fs/namespace.c
@@ -77,7 +89,7 @@ index d16b62c..06ca6bc 100644
  int fsnotify_fasync(int fd, struct file *file, int on)
  {
 diff --git a/fs/notify/mark.c b/fs/notify/mark.c
-index d90deaa..60b4239 100644
+index 34c38fa..d40cf58 100644
 --- a/fs/notify/mark.c
 +++ b/fs/notify/mark.c
 @@ -109,6 +109,7 @@ void fsnotify_put_mark(struct fsnotify_mark *mark)
@@ -96,7 +108,7 @@ index d90deaa..60b4239 100644
  
  void fsnotify_set_mark_mask_locked(struct fsnotify_mark *mark, __u32 mask)
  {
-@@ -275,6 +277,7 @@ err:
+@@ -311,6 +313,7 @@ err:
  
  	return ret;
  }
@@ -104,7 +116,7 @@ index d90deaa..60b4239 100644
  
  int fsnotify_add_mark(struct fsnotify_mark *mark, struct fsnotify_group *group,
  		      struct inode *inode, struct vfsmount *mnt, int allow_dups)
-@@ -336,6 +339,7 @@ void fsnotify_init_mark(struct fsnotify_mark *mark,
+@@ -372,6 +375,7 @@ void fsnotify_init_mark(struct fsnotify_mark *mark,
  	atomic_set(&mark->refcnt, 1);
  	mark->free_mark = free_mark;
  }
@@ -152,6 +164,18 @@ index 619359a..c14f60e 100644
  
  /**
   * splice_direct_to_actor - splices data directly between two non-pipes
+diff --git a/fs/xattr.c b/fs/xattr.c
+index 64e83ef..bd71e53 100644
+--- a/fs/xattr.c
++++ b/fs/xattr.c
+@@ -207,6 +207,7 @@ vfs_getxattr_alloc(struct dentry *dentry, const char *name, char **xattr_value,
+ 	*xattr_value = value;
+ 	return error;
+ }
++EXPORT_SYMBOL(vfs_getxattr_alloc);
+ 
+ /* Compare an extended attribute value with the given value */
+ int vfs_xattr_cmp(struct dentry *dentry, const char *xattr_name,
 diff --git a/security/commoncap.c b/security/commoncap.c
 index bab0611..3fa2f82 100644
 --- a/security/commoncap.c
